@@ -1,0 +1,32 @@
+CÁLCULO NUMÉRICO - 2s2018
+PROF. MAICON - TURMA D
+LUCAS BAGANHA GALANTE 182364
+TIAGO LOUREIRO CHAVES 187690
+
+1. PROJETO 1 - PRECISÃO DE MÁQUINA, PAG. 24 RUGGIERO
+  A.
+    The single precision is: 0.00000011920928955078
+    The double precision is: 0.00000000000000022204
+
+    Como esperado a precisão dupla teve maior
+    precisão que a simples para 20 casas decimais.
+
+  B.
+    Devido a presença de números negativos e positivos
+    (não tenho certeza disso então confirmem).
+
+  C.
+    1.
+      The single precision for VAL:    10.0 is: 0.00000095367431640625
+      The single precision for VAL:    17.0 is: 0.00000190734863281250
+      The single precision for VAL:   100.0 is: 0.00000762939453125000
+      The single precision for VAL:   184.0 is: 0.00001525878906250000
+      The single precision for VAL:  1000.0 is: 0.00006103515625000000
+      The single precision for VAL:  1575.0 is: 0.00012207031250000000
+      The single precision for VAL: 10000.0 is: 0.00097656250000000000
+      The single precision for VAL: 17893.0 is: 0.00195312500000000000
+    2.
+      Quanto maior VAL, menor será a precisão de máquina
+      pois serão necessários mais dígitos da mantissa para
+      representar s, o que diminui o número de dígitos que
+      podem ser usados para determinar a precisão.

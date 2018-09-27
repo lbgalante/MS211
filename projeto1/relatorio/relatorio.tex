@@ -1,0 +1,221 @@
+\documentclass[12pt,a4paper,final]{article}
+\usepackage[hmargin=2cm,vmargin=2cm,bmargin=2cm]{geometry} % Margem Obrigatoria
+\usepackage{pslatex} %times new roman obrigatorio
+\usepackage{setspace}
+\usepackage[T1]{fontenc}
+\usepackage[utf8x]{inputenc}
+\usepackage{ucs}
+\usepackage{amsmath}
+\usepackage{titling}
+%\usepackage[•]{•}kage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+%\graphicspath{{images/}}
+%\usepackage{float}
+%\usepackage{caption}
+\usepackage{floatrow}
+\usepackage{multirow}
+\usepackage{url}
+\usepackage[brazil]{babel} % em portugues brasileiro
+\usepackage[table]{xcolor}
+\usepackage{listings}
+\usepackage{color}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\footnotesize,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=2
+}
+
+\lstset{style=mystyle}\usepackage{color}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\footnotesize,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=2
+}
+
+\lstset{style=mystyle}
+\renewcommand{\lstlistingname}{Listagem}
+\newcommand{\blue}{\textcolor{blue}}
+\floatsetup[table]{capposition=top}
+\author{Lucas Baganha Galante 182364\\Tiago Loureiro Chaves }
+
+\title{Cálculo Numérico \\ Projeto 1 \\  \normalsize{Turma D}}
+
+\date{ 2 de Outubro de 2018}
+
+\begin{document}
+
+\onehalfspace %Espaçamento 1.5 obrigatório
+
+\maketitle
+
+% \begin{abstract}
+% \end{abstract}
+
+\section{Questão 1}
+\textbf{Fazer o projeto 1: ``Precisão da Máquina'',
+da página 24 do livro \textit{Cálculo Numérico}, Ruggiero-Lopes, 2a. edição.}
+
+\subsection{Parte A}
+
+\begin{lstlisting}
+  The single precision is: 0.00000011920928955078
+  The double precision is: 0.00000000000000022204
+\end{lstlisting}
+
+Como esperado a precisão dupla teve maior precisão que a simples para 20 casas decimais.
+
+\subsection{Parte B}
+
+Devido a presença de números negativos e positivos (não tenho certeza disso então confirmem).
+
+\subsection{Parte C}
+
+\begin{lstlisting}
+  The single precision for VAL:    10.0 is: 0.00000095367431640625
+  The single precision for VAL:    17.0 is: 0.00000190734863281250
+  The single precision for VAL:   100.0 is: 0.00000762939453125000
+  The single precision for VAL:   184.0 is: 0.00001525878906250000
+  The single precision for VAL:  1000.0 is: 0.00006103515625000000
+  The single precision for VAL:  1575.0 is: 0.00012207031250000000
+  The single precision for VAL: 10000.0 is: 0.00097656250000000000
+  The single precision for VAL: 17893.0 is: 0.00195312500000000000
+\end{lstlisting}
+
+Quanto maior VAL, menor será a precisão de máquina pois serão necessários
+mais dígitos da mantissa para representar s, o que diminui o número
+de dígitos que podem ser usados para determinar a precisão.
+
+\subsection{Código}
+
+\lstinputlisting[language=C]{../exercicio1/exercicio1.c}
+
+\section{Questão 2}
+
+\subsection{Parte A}
+
+\textbf{Como provar isso?}
+
+\subsection{Parte B}
+
+\begin{lstlisting}
+  Media: 4.5 F_m: -107.1875
+  Media: 6.75 F_m: 3160.56835938
+  Media: 5.625 F_m: 448.283996582
+  Media: 5.0625 F_m: 25.666475296
+  Media: 4.78125 F_m: -65.7846035361
+  Media: 4.921875 F_m: -27.5399343763
+  Media: 4.9921875 F_m: -2.97468937194
+  Media: 5.02734375 F_m: 10.8144866157
+  Media: 5.009765625 F_m: 3.78982958678
+  Media: 5.0009765625 F_m: 0.375396885005
+  Media: 4.99658203125 F_m: -1.30764677991
+  Media: 4.99877929688 F_m: -0.468130417219
+  Media: 4.99987792969 F_m: -0.0468688014225
+  Media: 5.00042724609 F_m: 0.164138449422
+  Media: 5.00015258789 F_m: 0.0586034363523
+  Media: 5.00001525879 F_m: 0.00585947185755
+  Media: 4.99994659424 F_m: -0.0205066260205
+  Media: 4.99998092651 F_m: -0.0073240674119
+  Media: 4.99999809265 F_m: -0.000732420361601
+  Media: 5.00000667572 F_m: 0.00256349510164
+  Media: 5.00000238419 F_m: 0.000915529709346
+  Media: 5.00000023842 F_m: 9.15527575671e-05
+  METODO DA BISSECAO
+  Achou a raiz: 5.00000023842
+  Numero de iteracoes: 22
+  -------------------------------
+  Media: 0.00627352572146 F_m: -19.5398354788
+  Media: 0.272664468156 F_m: -6.28387508792
+  Media: 0.398944824875 F_m: -3.19916587126
+  Media: 0.529910753606 F_m: -1.36530864458
+  Media: 0.627415026044 F_m: -0.620845449741
+  Media: 0.708728762294 F_m: -0.273858511139
+  Media: 0.772905410655 F_m: -0.121498345517
+  Media: 0.824082544553 F_m: -0.0534669661609
+  Media: 0.864303485423 F_m: -0.0234718342023
+  Media: 0.895777234458 F_m: -0.0102613711505
+  Media: 0.92022481204 F_m: -0.00447304307117
+  Media: 0.939117152973 F_m: -0.00194447669548
+  Media: 0.953645431535 F_m: -0.00084343269782
+  Media: 0.96477452829 F_m: -0.000365176821177
+  Media: 0.973272255917 F_m: -0.000157879038625
+  Media: 0.979744168215 F_m: -6.81778053888e-05
+  METODO DA SECANTE
+  Achou a raiz: 0.979744168215
+  Numero de iteracoes: 16
+  -------------------------------
+  Media: 0.645161290323 F_m: -0.527208787994
+  Media: 0.751292823997 F_m: -0.163234649909
+  Media: 0.827637023342 F_m: -0.050096355305
+  Media: 0.881697563505 F_m: -0.0152506576222
+  Media: 0.919439444395 F_m: -0.00461069390615
+  Media: 0.945474617282 F_m: -0.00138619147897
+  Media: 0.963263407207 F_m: -0.000414978367587
+  Media: 0.97532981075 F_m: -0.000123840254886
+  Media: 0.983471233981 F_m: -3.68741353824e-05
+  METODO DE NEWTON
+  Achou a raiz: 0.983471233981
+  Numero de iteracoes: 9
+  -------------------------------
+  Media: 1.05138339921 F_m: 0.00101632866931
+  Media: 1.00120254996 F_m: 1.38914231229e-08
+  METODO DE NEWTON PARA RAIZES MULTIPLAS
+  Achou a raiz: 1.00120254996
+  Numero de iteracoes: 2
+  -------------------------------
+\end{lstlisting}
+
+\subsection{Código}
+
+\lstinputlisting[language=Python]{../exercicio2/projeto1-2.py}
+
+
+\section{Questão 3}
+
+
+
+
+\bibliographystyle{IEEEtran}
+\footnotesize{
+\bibliography{}
+}
+\end{document}

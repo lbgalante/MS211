@@ -134,6 +134,28 @@ de dígitos que podem ser usados para determinar a precisão.
 
 \textbf{Como provar isso?}
 
+O método de Newton para encontrar zeros de funções:
+
+\[ x_{i+1} = x_i - \frac{f(x)}{f^{'}(x)} \]
+
+Pode ser reescrito com $U(x) = \frac{f(x)}{f^{'}(x)}$. Deste modo teremos
+
+\[ U^{'}(x) = \frac{f^{'}(x) \cdot f^{'}(x) - f(x) \cdot f^{'}^{'}(x)}{f^{'}(x)^2} \]
+
+E portanto a equação do método de Newton se transforma em:
+
+\[ x_{i+1} = x_i - \frac{U(x)}{U^{'}(x)} \]
+
+E pode ser simplificada em termos de $f(x)$ realizando a substituição, em:
+
+\[ x_{i+1} = x_i - \frac{f(x) \cdot f^{'}(x)}{f^{'}(x)^2 - f(x) \cdot f^{''}(x)} \]
+
+Este método se prova mais eficiente para encontrar zeros de funções com raízes múltiplas,
+como pode ser observado no item b, abaixo. Neste para um polinômio com raízes múltiplas
+foram necessárias 9 iterações do método de Newton original, enquanto que com a modificação
+foram necessárias somente 2 iterações para o mesmo ponto inicial.
+
+
 \subsection{Parte B}
 
 \begin{lstlisting}

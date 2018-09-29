@@ -129,6 +129,7 @@ sim linearmente com constante assintótica do erro (taxa de convergência) igual
 
 a)  Mostre,  com  o  devido  desenvolvimento,  uma  forma  de  recuperar  a  convergência  quadrática  do
 método de Newton.
+
 b)  Defina um problema com raiz múltipla, implemente o Método da Bisseção, o Método da Secante,
 o método de Newton original e a sua modificação discutida na letra a) e os utilize para calcular a
 raiz, mostrando numericamente a taxa e a ordem de convergência obtidas para cada método.
@@ -194,6 +195,10 @@ $ B = \frac{f^{(m+1)(\alpha)}}{(m+1)!} $ e $ C = \frac{B}{A} $, constantes:
 \[ f'(x) = m \cdot A \cdot (x - \alpha)^{m-1} \]
 
 Substituindo em $ \frac{U(x)}{U'(x)} $:
+
+
+\[ U(x) = \frac{1}{m} \cdot (x-\alpha) + \frac{B}{m \cdot A} \cdot (x-\alpha)^2, \quad
+   U'(x) = \frac{1}{m} + \frac{2B}{m \cdot A} \cdot (x-\alpha) \]
 \[ \frac{U(x)}{U'(x)} = \frac
    {\cancel{\frac{1}{m}} \cdot (x-\alpha) \cdot [1 + C \cdot (x-\alpha)]}
    {\cancel{\frac{1}{m}} \cdot [1 + 2C \cdot (x-\alpha)]} \]

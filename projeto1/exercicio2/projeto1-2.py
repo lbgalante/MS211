@@ -23,7 +23,7 @@ def ddfunc(x):
     return 40*x**3 -  240*x**2 + 408*x - 208
 
 def section_divider():
-    print("-------------------------------")    
+    print("-------------------------------")
 
 #Methods for finding roots
 def bissecao(a, b):
@@ -69,7 +69,7 @@ def falsaposicao(a,b):
         falsaposicao(a,m)
     else:
         falsaposicao(m,b)
-    
+
 def newton(x):
     global i_newton
     i_newton += 1
@@ -147,7 +147,7 @@ def newton_mult_root(x):
     f_m = func(m)
     print('Media: '+str(m)+' F_m: '+str(f_m))
     if(math.fabs(f_m) < EPSILON):
-        print("METODO DE NEWTON PARA RAÍZES MÚLTIPLAS")
+        print("METODO DE NEWTON PARA RAIZES MULTIPLAS")
         print("Achou a raiz: "+str(m))
         print("Numero de iteracoes: "+str(i_newton_mr))
         section_divider()
@@ -156,17 +156,7 @@ def newton_mult_root(x):
         newton_mult_root(m)
 
 
-##bissecao(1.2,2.4)
-##falsaposicao(1.2,2.4)
-##newton(2.0)
-##secante(1.2,2.4)
-
-##newton(10.0)
-##newton_sqrt(10.0)
-
-##newton(3.0)
-
-#divbyA(4.0)
+#Pontos iniciais para os algoritmos
 
 bissecao(0.0,9.0)
 secante(0.0,9.0)

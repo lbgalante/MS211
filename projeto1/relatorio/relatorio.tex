@@ -36,51 +36,27 @@
     basicstyle=\footnotesize,
     breakatwhitespace=false,
     breaklines=true,
-    captionpos=b,
+    captionpos=t,
     keepspaces=true,
     numbers=left,
     numbersep=5pt,
     showspaces=false,
     showstringspaces=false,
     showtabs=false,
-    tabsize=2
-}
-
-\lstset{style=mystyle}\usepackage{color}
-
-\definecolor{codegreen}{rgb}{0,0.6,0}
-\definecolor{codegray}{rgb}{0.5,0.5,0.5}
-\definecolor{codepurple}{rgb}{0.58,0,0.82}
-\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
-
-\lstdefinestyle{mystyle}{
-    backgroundcolor=\color{backcolour},
-    commentstyle=\color{codegreen},
-    keywordstyle=\color{magenta},
-    numberstyle=\tiny\color{codegray},
-    stringstyle=\color{codepurple},
-    basicstyle=\footnotesize,
-    breakatwhitespace=false,
-    breaklines=true,
-    captionpos=b,
-    keepspaces=true,
-    numbers=left,
-    numbersep=5pt,
-    showspaces=false,
-    showstringspaces=false,
-    showtabs=false,
+    frame=shadowbox,
     tabsize=2
 }
 
 \lstset{style=mystyle}
 \renewcommand{\lstlistingname}{Listagem}
 \newcommand{\blue}{\textcolor{blue}}
+\renewcommand{\thesubsection}{\thesection.\Alph{subsection}}
 \floatsetup[table]{capposition=top}
 \author{Lucas Baganha Galante 182364\\Tiago Loureiro Chaves 187690}
 
-\title{Cálculo Numérico \\ Projeto 1 \\  \normalsize{Turma D}}
+\title{Cálculo Numérico \\ Projeto 1 - Turma D}
 
-\date{ 2 de Outubro de 2018}
+\date{2 de Outubro de 2018}
 
 \begin{document}
 
@@ -95,22 +71,34 @@
 \textbf{Fazer o projeto 1: ``Precisão da Máquina'',
 da página 24 do livro \textit{Cálculo Numérico}, Ruggiero-Lopes, 2a. edição.}
 
-\subsection{Parte A}
+\subsection{}
 
-\begin{lstlisting}
+O algoritmo descrito no exercício foi implementado na linguagem C, por apresentar
+variáveis com precisão simples e dupla. A saída contém a precisão de máquina de
+cada tipo de variável expressa em 20 casas decimais, como visto na Listagem~\ref{lst:label1}.
+
+\begin{lstlisting}[caption= \textbf{Precisão de máquina para variáveis simples e duplas.},label={lst:label1}]
   The single precision is: 0.00000011920928955078
   The double precision is: 0.00000000000000022204
 \end{lstlisting}
 
-Como esperado a precisão dupla teve maior precisão que a simples para 20 casas decimais.
+A variável com precisão dupla apresenta maior precisão que a variável com precisão
+simples; com 16 casas decimais, que compara com 7 casas decimais da precisão simples. Portanto o ganho
+é maior que o dobro, como esperado.
 
-\subsection{Parte B}
+\subsection{}
 
-Devido a presença de números negativos e positivos (não tenho certeza disso então confirmem).
+Quando se sai do laço while se perde uma precisão a mais que a precisão de máquina, que é o
+motivo para se sair do laço, pois a soma $1+A$ não é maior que $1$, devido a aritmética de ponto
+flutuante. Deste modo é necessário multiplicar $A$ por 2, para que se retorne ao menor valor em que
+a máquina possui precisão.
 
-\subsection{Parte C}
+\subsection{}
 
-\begin{lstlisting}
+O algoritmo executado na \texttt{Parte A} foi modificado para se utilizar um valor \textbf{VAL} para
+inicialização ao invés da referência, o número 1. A saída é vista abaixo na Listagem~\ref{lst:label2}
+
+\begin{lstlisting}[caption= \textbf{Precisão de máquina para diferentes valores VAL.},label={lst:label2}]
   The single precision for VAL:    10.0 is: 0.00000095367431640625
   The single precision for VAL:    17.0 is: 0.00000190734863281250
   The single precision for VAL:   100.0 is: 0.00000762939453125000
@@ -121,20 +109,34 @@ Devido a presença de números negativos e positivos (não tenho certeza disso e
   The single precision for VAL: 17893.0 is: 0.00195312500000000000
 \end{lstlisting}
 
-Quanto maior VAL, menor será a precisão de máquina pois serão necessários
-mais dígitos da mantissa para representar s, o que diminui o número
+Se percebe da saída que quanto maior o valor de \textbf{VAL} menor se torna
+a precisão da máquina. Isso ocorre pois serão necessários
+mais dígitos da mantissa para representar na variável de iteração (no algoritmo
+atribuída como variável \texttt{s}), o que diminui o número
 de dígitos que podem ser usados para determinar a precisão.
 
-\subsection{Código}
+\subsection*{Código}
 
-\lstinputlisting[language=C]{../exercicio1/exercicio1.c}
+\lstinputlisting[language=C,caption=\textbf{Base de código para a questão 1.}]{../exercicio1/exercicio1.c}
 
 \section{Questão 2}
+Uma raiz $\alpha$ de $f(x) = 0$ e dita múltipla de multiplicidade $p$ se $ 0 \neq |g(\alpha)| < \infty, f(x) = (x - \alpha)^{p}g(x)$. Assim, se $\alpha$ é de multiplicidade $p$ então
 
-\subsection{Parte A}
+ \[ f(\alpha) = f'(\alpha) = ... = f^{(p-1)}(\alpha) = 0 \quad e \quad f^{(p)}(\alpha) \neq 0 \]
+
+Vimos que e $\alpha$ é uma raiz múltipla então o método de Newton não converge quadraticamente, mas
+sim linearmente com constante assintótica do erro (taxa de convergência) igual a $(1−1/p)$.
+
+a)  Mostre,  com  o  devido  desenvolvimento,  uma  forma  de  recuperar  a  convergência  quadrática  do
+método de Newton.
+b)  Defina um problema com raiz múltipla, implemente o Método da Bisseção, o Método da Secante,
+o método de Newton original e a sua modificação discutida na letra a) e os utilize para calcular a
+raiz, mostrando numericamente a taxa e a ordem de convergência obtidas para cada método.
+
+\subsection{}
 
 
-Uma sequência de iterações $ {x_n / n \geq 0} $ é dita convergente para um ponto $ \alpha $, com 
+Uma sequência de iterações $ {x_n / n \geq 0} $ é dita convergente para um ponto $ \alpha $, com
 ordem de convergência $ p \geq 1 $ se para algum $ c > 0 $ (taxa de convergência):
 \[ |\alpha - x_{n+1}| \leq c \cdot |\alpha - x_n|^p, \quad n \geq 0 \],
 ou ainda:
@@ -146,33 +148,33 @@ de multiplicidade $ m $:
 \[ f(\alpha) = f'(\alpha) = ... = f^{(m-1)}(\alpha) = 0 \quad e \quad f^{(m)}(\alpha) \neq 0 \]
 
 Expandindo $ f(x) $ e $ f'(x) $ em torno de $ \alpha $:
-\[ f(x) = \cancelto{0}{f(\alpha)} + 
-          \; \cancelto{0}{ ... } \quad + 
-          \frac{(x - \alpha)^m}{m!} \cdot f^{(m)}(\alpha) + 
-          \frac{(x - \alpha)^{(m+1)}}{(m+1)!} \cdot f^{(m+1)}(\alpha) + 
+\[ f(x) = \cancelto{0}{f(\alpha)} +
+          \; \cancelto{0}{ ... } \quad +
+          \frac{(x - \alpha)^m}{m!} \cdot f^{(m)}(\alpha) +
+          \frac{(x - \alpha)^{(m+1)}}{(m+1)!} \cdot f^{(m+1)}(\alpha) +
           \underbrace{O((x - \alpha)^{m+2})}_{\approx 0} \]
-\[ f'(x) = \cancelto{0}{f'(\alpha)} + 
-           (x - \alpha) \cdot \cancelto{0}{f''(\alpha)} + 
-           \; \cancelto{0}{ ... } \quad + 
-           \frac{(x - \alpha)^{(m-1)}}{(m-1)!} \cdot f^{(m)}(\alpha) + 
+\[ f'(x) = \cancelto{0}{f'(\alpha)} +
+           (x - \alpha) \cdot \cancelto{0}{f''(\alpha)} +
+           \; \cancelto{0}{ ... } \quad +
+           \frac{(x - \alpha)^{(m-1)}}{(m-1)!} \cdot f^{(m)}(\alpha) +
            \underbrace{O((x - \alpha)^{m})}_{\approx 0} \]
 
 Avaliando-as então em $ x_n $:
-\[ f(x_n) = \frac{(x_n - \alpha)^m}{m!} \cdot f^{(m)}(\alpha) + 
+\[ f(x_n) = \frac{(x_n - \alpha)^m}{m!} \cdot f^{(m)}(\alpha) +
             \frac{(x_n - \alpha)^{(m+1)}}{(m+1)!} \cdot f^{(m+1)}(\alpha) \]
 \[ f'(x_n) = \frac{(x_n - \alpha)^{(m-1)}}{(m-1)!} \cdot f^{(m)}(\alpha) \]
 
 Assim, podemos reescrever $ x_{n+1} - \alpha $ como:
 \[ x_{n+1} - \alpha \overset{def.}{=} (x_n - m \cdot \frac{f(x_n)}{f'(x_n)}) - \alpha\]
-\[ = x_n - m \cdot 
-     \frac{\frac{(x_n - \alpha)^m}{m!} \cdot f^{(m)}(\alpha) + 
+\[ = x_n - m \cdot
+     \frac{\frac{(x_n - \alpha)^m}{m!} \cdot f^{(m)}(\alpha) +
             \frac{(x_n - \alpha)^{(m+1)}}{(m+1)!} \cdot f^{(m+1)}(\alpha)}
           {\frac{(x_n - \alpha)^{(m-1)}}{(m-1)!} \cdot f^{(m)}(\alpha)} - \alpha\]
-\[ = x_n - \cancel{m} \cdot \frac{(x_n - \alpha)^{\bcancel{m}} \cdot 
+\[ = x_n - \cancel{m} \cdot \frac{(x_n - \alpha)^{\bcancel{m}} \cdot
      [(m+1) \cdot f^{(m)}(\alpha) + (x_n - \alpha) \cdot f^{(m+1)}(\alpha))]}
-     {(m+1)\cancel{\; ! \;}} \cdot \frac{\cancel{(m-1)!}}{\bcancel{(x - \alpha)^{m-1}} 
+     {(m+1)\cancel{\; ! \;}} \cdot \frac{\cancel{(m-1)!}}{\bcancel{(x - \alpha)^{m-1}}
      \cdot f^{(m)}(\alpha)} - \alpha\]
-\[ = x_n - \frac{(x_n - \alpha) \cdot [(m+1) \cdot f^{(m)}(\alpha) + (x_n - \alpha) 
+\[ = x_n - \frac{(x_n - \alpha) \cdot [(m+1) \cdot f^{(m)}(\alpha) + (x_n - \alpha)
      \cdot f^{(m+1)}(\alpha))]}{(m+1) \cdot f^{(m)}(\alpha)} - \alpha\]
 \[ = \cancel{x_n} - (\cancel{x_n} - \bcancel{\alpha}) - \frac{(x_n - \alpha)^2 \cdot f^{(m+1)}(\alpha)}
      {(m+1) \cdot f^{(m)}(\alpha)} - \bcancel{\alpha}\]
@@ -186,7 +188,7 @@ Logo:
 Outra forma de modificar o método de Newton, implementada na parte B, é:
 \[ x_{n+1} = x_n - \frac{U(x_n)}{U'(x_n)} \text{\; , \; onde \quad} U(x) = \frac{f(x)}{f'(x)} \]
 
-Usando as expansões de $ f $ e $ f' $ calculadas anteriormente com $ A = \frac{f^{(m)(\alpha)}}{m!} \neq 0 $, 
+Usando as expansões de $ f $ e $ f' $ calculadas anteriormente com $ A = \frac{f^{(m)(\alpha)}}{m!} \neq 0 $,
 $ B = \frac{f^{(m+1)(\alpha)}}{(m+1)!} $ e $ C = \frac{B}{A} $, constantes:
 \[ f(x) = A \cdot (x - \alpha)^m + B \cdot (x - \alpha)^{m+1} \]
 \[ f'(x) = m \cdot A \cdot (x - \alpha)^{m-1} \]
@@ -198,16 +200,16 @@ Substituindo em $ \frac{U(x)}{U'(x)} $:
 
 Portanto o erro na $(n+1)$-ésima iteração é $ \; e_{n+1} = x_{n+1} - \alpha \overset{def.}{=} x_n - \frac{U(x)}{U'(x)} - \alpha = e_n - \frac{U(x)}{U'(x)}$:
 \[ e_{n+1} = e_n - \frac{e_n \cdot (1 + C \cdot e_n)}{(1 + 2C \cdot e_n)} \]
-\[ = e_n \cdot ( 1 - \frac{(1 + C \cdot e_n)}{(1 + 2C \cdot e_n)} ) 
+\[ = e_n \cdot ( 1 - \frac{(1 + C \cdot e_n)}{(1 + 2C \cdot e_n)} )
    = e_n \cdot (\frac{C \cdot e_n}{1 + 2C \cdot e_n})\]
 \[ = e_n^2 \cdot (\frac{C}{1 + 2C \cdot e_n})\]
 
 Assim, temos que:
-\[ \lim_{n \to \infty} \frac{|e_{n+1}|}{|e_n|^2} = \lim_{n \to \infty} |\frac{C}{1 + 2C \cdot e_n}| 
-   = |C| \cdot \lim_{n \to \infty} \frac{1}{1 + 2|C| \cdot 
-   \cancel{|\underbrace{x_n}_{\to \; \alpha}- \; \alpha \;|}} = |C| \cdot \lim_{n \to \infty} \frac{1}{1} 
+\[ \lim_{n \to \infty} \frac{|e_{n+1}|}{|e_n|^2} = \lim_{n \to \infty} |\frac{C}{1 + 2C \cdot e_n}|
+   = |C| \cdot \lim_{n \to \infty} \frac{1}{1 + 2|C| \cdot
+   \cancel{|\underbrace{x_n}_{\to \; \alpha}- \; \alpha \;|}} = |C| \cdot \lim_{n \to \infty} \frac{1}{1}
    = |C| \]
-\[ \therefore \lim_{n \to \infty} \frac{|e_{n+1}|}{|e_n|^2} = |C| \Rightarrow 
+\[ \therefore \lim_{n \to \infty} \frac{|e_{n+1}|}{|e_n|^2} = |C| \Rightarrow
    \text{ordem de convergência 2 (convergência quadrática)} \]
 
 Concluindo, caso estejamos tratando uma função $ f $ com raiz $ \alpha $ de multiplicidade $ m $, as
@@ -220,9 +222,25 @@ foram necessárias 9 iterações do método de Newton original, enquanto que com
 apresentada foram necessárias somente 2 iterações para o mesmo ponto inicial.
 
 
-\subsection{Parte B}
+\subsection{}
 
-\begin{lstlisting}
+Foram implementados os 4 algoritmos pedidos no enunciado, Método da Bisseção, o Método da Secante,
+o Método de Newton original e sua modificação (na \texttt{Parte A} dessa questão foram provados duas maneiras
+distintas de se obter a convergência quadrática do método de Newton, foi implementada a segunda maneira pois não
+depende saber m a priori).
+
+Para exemplificar este exercício foi utilizado um polinômio de raizes múltiplas:
+
+\[ 2x^5 + - 20x^4 + 68x^3 -104x^2 + 74x -20 = 2(x-1)^3(x-2)( x-5)\]
+
+O cálculo da raiz de cada um desses algoritmos está exibido na Listagem~\ref{lst:label3}, assim como
+o número de iterações necessárias para convergir. Os métodos da bisseção e secante convergem a taxas menores,
+e portanto realizam maior número de iterações. (Adendo: todos os métodos são dependentes dos pontos inicias,
+e podem convergir mais rapidamente dependendo destes pontos.) Os métodos de Newton comparados apresentaram uma
+diferença significativa em fator de convergência, sendo o método modificado mais que quadraticamente (no caso até cubicamente mais rápido)
+ mais rápido para o mesmo ponto inicial.
+
+\begin{lstlisting}[caption= \textbf{Passo a passo de diferentes algoritmos para determinar a raiz de função com raizes múltiplas.},label={lst:label3}]
   Media: 4.5 F_m: -107.1875
   Media: 6.75 F_m: 3160.56835938
   Media: 5.625 F_m: 448.283996582
@@ -290,14 +308,18 @@ apresentada foram necessárias somente 2 iterações para o mesmo ponto inicial.
   -------------------------------
 \end{lstlisting}
 
-\subsection{Código}
+\subsection*{Código}
 
-\lstinputlisting[language=Python]{../exercicio2/projeto1-2.py}
+\lstinputlisting[caption=\textbf{Base de código para a questão 2.},language=Python]{../exercicio2/projeto1-2.py}
 
 
 \section{Questão 3}
 
+\subsection{}
 
+\subsection{}
+
+\subsection*{Código}
 
 
 \bibliographystyle{IEEEtran}

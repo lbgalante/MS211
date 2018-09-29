@@ -20,6 +20,7 @@
 \usepackage[table]{xcolor}
 \usepackage{listings}
 \usepackage{color}
+\usepackage{cancel}
 
 \definecolor{codegreen}{rgb}{0,0.6,0}
 \definecolor{codegray}{rgb}{0.5,0.5,0.5}
@@ -75,7 +76,7 @@
 \renewcommand{\lstlistingname}{Listagem}
 \newcommand{\blue}{\textcolor{blue}}
 \floatsetup[table]{capposition=top}
-\author{Lucas Baganha Galante 182364\\Tiago Loureiro Chaves }
+\author{Lucas Baganha Galante 182364\\Tiago Loureiro Chaves 187690}
 
 \title{Cálculo Numérico \\ Projeto 1 \\  \normalsize{Turma D}}
 
@@ -132,28 +133,91 @@ de dígitos que podem ser usados para determinar a precisão.
 
 \subsection{Parte A}
 
-\textbf{Como provar isso?}
 
-O método de Newton para encontrar zeros de funções:
+Uma sequência de iterações $ {x_n / n \geq 0} $ é dita convergente para um ponto $ \alpha $, com 
+ordem de convergência $ p \geq 1 $ se para algum $ c > 0 $ (taxa de convergência):
+\[ |\alpha - x_{n+1}| \leq c \cdot |\alpha - x_n|^p, \quad n \geq 0 \],
+ou ainda:
+\[ \lim_{n \to \infty} \frac{|\alpha - x_{n+1}|}{|\alpha - x_n|^p} = c \]
 
-\[ x_{i+1} = x_i - \frac{f(x)}{f^{'}(x)} \]
+Analisando o método de Newton modificado para uma função $ f $ com raiz $ \alpha $ de $ f(x) = 0 $
+de multiplicidade $ m $:
+\[ x_{n+1} = x_n - m \cdot \frac{f(x_n)}{f'(x_n)} \]
+\[ f(\alpha) = f'(\alpha) = ... = f^{(m-1)}(\alpha) = 0 \quad e \quad f^{(m)}(\alpha) \neq 0 \]
 
-Pode ser reescrito com $U(x) = \frac{f(x)}{f^{'}(x)}$. Deste modo teremos
+Expandindo $ f(x) $ e $ f'(x) $ em torno de $ \alpha $:
+\[ f(x) = \cancelto{0}{f(\alpha)} + 
+          \; \cancelto{0}{ ... } \quad + 
+          \frac{(x - \alpha)^m}{m!} \cdot f^{(m)}(\alpha) + 
+          \frac{(x - \alpha)^{(m+1)}}{(m+1)!} \cdot f^{(m+1)}(\alpha) + 
+          \underbrace{O((x - \alpha)^{m+2})}_{\approx 0} \]
+\[ f'(x) = \cancelto{0}{f'(\alpha)} + 
+           (x - \alpha) \cdot \cancelto{0}{f''(\alpha)} + 
+           \; \cancelto{0}{ ... } \quad + 
+           \frac{(x - \alpha)^{(m-1)}}{(m-1)!} \cdot f^{(m)}(\alpha) + 
+           \underbrace{O((x - \alpha)^{m})}_{\approx 0} \]
 
-\[ U^{'}(x) = \frac{f^{'}(x) \cdot f^{'}(x) - f(x) \cdot f^{'}^{'}(x)}{f^{'}(x)^2} \]
+Avaliando-as então em $ x_n $:
+\[ f(x_n) = \frac{(x_n - \alpha)^m}{m!} \cdot f^{(m)}(\alpha) + 
+            \frac{(x_n - \alpha)^{(m+1)}}{(m+1)!} \cdot f^{(m+1)}(\alpha) \]
+\[ f'(x_n) = \frac{(x_n - \alpha)^{(m-1)}}{(m-1)!} \cdot f^{(m)}(\alpha) \]
 
-E portanto a equação do método de Newton se transforma em:
+Assim, podemos reescrever $ x_{n+1} - \alpha $ como:
+\[ x_{n+1} - \alpha \overset{def.}{=} (x_n - m \cdot \frac{f(x_n)}{f'(x_n)}) - \alpha\]
+\[ = x_n - m \cdot 
+     \frac{\frac{(x_n - \alpha)^m}{m!} \cdot f^{(m)}(\alpha) + 
+            \frac{(x_n - \alpha)^{(m+1)}}{(m+1)!} \cdot f^{(m+1)}(\alpha)}
+          {\frac{(x_n - \alpha)^{(m-1)}}{(m-1)!} \cdot f^{(m)}(\alpha)} - \alpha\]
+\[ = x_n - \cancel{m} \cdot \frac{(x_n - \alpha)^{\bcancel{m}} \cdot 
+     [(m+1) \cdot f^{(m)}(\alpha) + (x_n - \alpha) \cdot f^{(m+1)}(\alpha))]}
+     {(m+1)\cancel{\; ! \;}} \cdot \frac{\cancel{(m-1)!}}{\bcancel{(x - \alpha)^{m-1}} 
+     \cdot f^{(m)}(\alpha)} - \alpha\]
+\[ = x_n - \frac{(x_n - \alpha) \cdot [(m+1) \cdot f^{(m)}(\alpha) + (x_n - \alpha) 
+     \cdot f^{(m+1)}(\alpha))]}{(m+1) \cdot f^{(m)}(\alpha)} - \alpha\]
+\[ = \cancel{x_n} - (\cancel{x_n} - \bcancel{\alpha}) - \frac{(x_n - \alpha)^2 \cdot f^{(m+1)}(\alpha)}
+     {(m+1) \cdot f^{(m)}(\alpha)} - \bcancel{\alpha}\]
+\[ = - (x_n - \alpha)^2 \cdot \frac{f^{(m+1)}(\alpha)}{(m+1) \cdot f^{(m)}(\alpha)}\]
 
-\[ x_{i+1} = x_i - \frac{U(x)}{U^{'}(x)} \]
+Logo:
+\[ | x_{n+1} - \alpha | =  \underbrace{|\frac{f^{(m+1)}(\alpha)}{(m+1) \cdot f^{(m)}(\alpha)}|
+                           }_{= \; c} \cdot |x_n - \alpha|^{\overbrace{2}^{= \; p}} \]
+\[ \Rightarrow \text{ordem de convergência 2 (convergência quadrática)} \]
 
-E pode ser simplificada em termos de $f(x)$ realizando a substituição, em:
+Outra forma de modificar o método de Newton, implementada na parte B, é:
+\[ x_{n+1} = x_n - \frac{U(x_n)}{U'(x_n)} \text{\; , \; onde \quad} U(x) = \frac{f(x)}{f'(x)} \]
 
-\[ x_{i+1} = x_i - \frac{f(x) \cdot f^{'}(x)}{f^{'}(x)^2 - f(x) \cdot f^{''}(x)} \]
+Usando as expansões de $ f $ e $ f' $ calculadas anteriormente com $ A = \frac{f^{(m)(\alpha)}}{m!} \neq 0 $, 
+$ B = \frac{f^{(m+1)(\alpha)}}{(m+1)!} $ e $ C = \frac{B}{A} $, constantes:
+\[ f(x) = A \cdot (x - \alpha)^m + B \cdot (x - \alpha)^{m+1} \]
+\[ f'(x) = m \cdot A \cdot (x - \alpha)^{m-1} \]
 
-Este método se prova mais eficiente para encontrar zeros de funções com raízes múltiplas,
-como pode ser observado no item b, abaixo. Neste para um polinômio com raízes múltiplas
-foram necessárias 9 iterações do método de Newton original, enquanto que com a modificação
-foram necessárias somente 2 iterações para o mesmo ponto inicial.
+Substituindo em $ \frac{U(x)}{U'(x)} $:
+\[ \frac{U(x)}{U'(x)} = \frac
+   {\cancel{\frac{1}{m}} \cdot (x-\alpha) \cdot [1 + C \cdot (x-\alpha)]}
+   {\cancel{\frac{1}{m}} \cdot [1 + 2C \cdot (x-\alpha)]} \]
+
+Portanto o erro na $(n+1)$-ésima iteração é $ \; e_{n+1} = x_{n+1} - \alpha \overset{def.}{=} x_n - \frac{U(x)}{U'(x)} - \alpha = e_n - \frac{U(x)}{U'(x)}$:
+\[ e_{n+1} = e_n - \frac{e_n \cdot (1 + C \cdot e_n)}{(1 + 2C \cdot e_n)} \]
+\[ = e_n \cdot ( 1 - \frac{(1 + C \cdot e_n)}{(1 + 2C \cdot e_n)} ) 
+   = e_n \cdot (\frac{C \cdot e_n}{1 + 2C \cdot e_n})\]
+\[ = e_n^2 \cdot (\frac{C}{1 + 2C \cdot e_n})\]
+
+Assim, temos que:
+\[ \lim_{n \to \infty} \frac{|e_{n+1}|}{|e_n|^2} = \lim_{n \to \infty} |\frac{C}{1 + 2C \cdot e_n}| 
+   = |C| \cdot \lim_{n \to \infty} \frac{1}{1 + 2|C| \cdot 
+   \cancel{|\underbrace{x_n}_{\to \; \alpha}- \; \alpha \;|}} = |C| \cdot \lim_{n \to \infty} \frac{1}{1} 
+   = |C| \]
+\[ \therefore \lim_{n \to \infty} \frac{|e_{n+1}|}{|e_n|^2} = |C| \Rightarrow 
+   \text{ordem de convergência 2 (convergência quadrática)} \]
+
+Concluindo, caso estejamos tratando uma função $ f $ com raiz $ \alpha $ de multiplicidade $ m $, as
+seguintes modificações no método de Newton recuperam sua convergência quadrática:
+\[ x_{n+1} = x_n - m \cdot \frac{f(x_n)}{f'(x_n)} \]
+\[ x_{n+1} = x_n - \frac{U(x_n)}{U'(x_n)} ,  \quad U(x) = \frac{f(x)}{f'(x)} \]
+
+Além disso, como veremos na parte B abaixo, para um polinômio com raízes múltiplas
+foram necessárias 9 iterações do método de Newton original, enquanto que com a segunda modificação
+apresentada foram necessárias somente 2 iterações para o mesmo ponto inicial.
 
 
 \subsection{Parte B}

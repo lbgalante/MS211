@@ -143,7 +143,7 @@ ordem de convergência $ p \geq 1 $ se para algum $ c > 0 $ (taxa de convergênc
 ou ainda:
 \[ \lim_{n \to \infty} \frac{|\alpha - x_{n+1}|}{|\alpha - x_n|^p} = c \]
 
-Analisando o método de Newton modificado para uma função $ f $ com raiz $ \alpha $ de $ f(x) = 0 $
+Analisando o método de Newton modificado ~\cite[p.~101]{ruggiero} para uma função $ f $ com raiz $ \alpha $ de $ f(x) = 0 $
 de multiplicidade $ m $:
 \[ x_{n+1} = x_n - m \cdot \frac{f(x_n)}{f'(x_n)} \]
 \[ f(\alpha) = f'(\alpha) = ... = f^{(m-1)}(\alpha) = 0 \quad e \quad f^{(m)}(\alpha) \neq 0 \]
@@ -186,7 +186,7 @@ Logo:
                            }_{= \; c} \cdot |x_n - \alpha|^{\overbrace{2}^{= \; p}} \]
 \[ \Rightarrow \text{ordem de convergência 2 (convergência quadrática)} \]
 
-Outra forma de modificar o método de Newton, implementada na parte B, é:
+Outra forma de modificar o método de Newton ~\cite[p.~353-356]{rabinowitz}, implementada na parte B, é:
 \[ x_{n+1} = x_n - \frac{U(x_n)}{U'(x_n)} \text{\; , \; onde \quad} U(x) = \frac{f(x)}{f'(x)} \]
 
 Usando as expansões de $ f $ e $ f' $ calculadas anteriormente com $ A = \frac{f^{(m)(\alpha)}}{m!} \neq 0 $,
@@ -329,6 +329,6 @@ diferença significativa em fator de convergência, sendo o método modificado m
 
 \bibliographystyle{IEEEtran}
 \footnotesize{
-\bibliography{}
+\bibliography{projeto-1.bib}
 }
 \end{document}

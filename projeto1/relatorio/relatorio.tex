@@ -370,12 +370,142 @@ Deste modo, a complexidade computacional do algoritmo passa a ser dominada pelas
 funções de substituição para frente e para trás utilizadas na parte A, que 
 executam $ O(n^2) $ operações para resolver os sistemas triangulares resultantes.
 
+\subsection{}
+Como esperado, para todos os valores testados de $ n $ o algoritmo da parte B foi mais rápido que o da parte A (vide Listagem \ref{lst:label4}).
+
+Contudo, notou-se um resultado interessante ao executar-se o código da Listagem \ref{ex3c},
+os erros entre a solução analítica do sistema e os algoritmos das partes A e B foram 
+iguais, sendo o maior erro de um sistema $ 256 \times 256 $ ($ n = 256 $) da ordem de 
+$ e^{-14} \approx 10^{-6} $.
+
+\begin{lstlisting}[caption= \textbf{Razão entre o tempo de execução do algoritmo da 
+parte A ($ t_1 $) pelo da parte B ($ t_2 $) para solução do sistema da parte C de tamanho 
+$ n \times n $. Média para 10 repetições.},label={lst:label4}]
+n == 4
+t1/t2 == 1.7712765957446808
+n == 16
+t1/t2 == 3.4806303348653973
+n == 64
+t1/t2 == 25.20442779291553
+n == 128
+t1/t2 == 13.798185149103297
+n == 256
+t1/t2 == 40.80784523531436
+------------------------
+n == 4
+t1/t2 == 1.6923076923076923
+n == 16
+t1/t2 == 3.2416938110749185
+n == 64
+t1/t2 == 9.820340136054421
+n == 128
+t1/t2 == 6.819929544264985
+n == 256
+t1/t2 == 41.670446037009306
+------------------------
+n == 4
+t1/t2 == 1.7548209366391185
+n == 16
+t1/t2 == 3.296
+n == 64
+t1/t2 == 25.154520547945207
+n == 128
+t1/t2 == 40.28623791409098
+n == 256
+t1/t2 == 80.32036298306787
+------------------------
+n == 4
+t1/t2 == 1.8666666666666667
+n == 16
+t1/t2 == 3.0426758938869667
+n == 64
+t1/t2 == 9.867851521511017
+n == 128
+t1/t2 == 7.380226342670431
+n == 256
+t1/t2 == 40.61159398664528
+------------------------
+n == 4
+t1/t2 == 1.901197604790419
+n == 16
+t1/t2 == 3.3423076923076924
+n == 64
+t1/t2 == 24.862773029439698
+n == 128
+t1/t2 == 40.50711764939133
+n == 256
+t1/t2 == 43.35305240060278
+------------------------
+n == 4
+t1/t2 == 1.7853107344632768
+n == 16
+t1/t2 == 3.443097643097643
+n == 64
+t1/t2 == 23.775139756658994
+n == 128
+t1/t2 == 37.60842373962986
+n == 256
+t1/t2 == 41.50932503286756
+------------------------
+n == 4
+t1/t2 == 2.0238095238095237
+n == 16
+t1/t2 == 3.3963538149898715
+n == 64
+t1/t2 == 25.566847176313384
+n == 128
+t1/t2 == 41.207244620184
+n == 256
+t1/t2 == 42.573204570044155
+------------------------
+n == 4
+t1/t2 == 1.7977207977207976
+n == 16
+t1/t2 == 3.1312649164677806
+n == 64
+t1/t2 == 0.36914167185954394
+n == 128
+t1/t2 == 36.17040019046382
+n == 256
+t1/t2 == 40.95893771989383
+------------------------
+n == 4
+t1/t2 == 1.8115942028985508
+n == 16
+t1/t2 == 3.18782722513089
+n == 64
+t1/t2 == 20.51047473739804
+n == 128
+t1/t2 == 40.946026061872075
+n == 256
+t1/t2 == 39.80277838547364
+------------------------
+n == 4
+t1/t2 == 1.8521739130434782
+n == 16
+t1/t2 == 3.2722044728434505
+n == 64
+t1/t2 == 24.043363550263834
+n == 128
+t1/t2 == 40.96217446876498
+n == 256
+t1/t2 == 42.269799554223745
+------------------------
+n: t1/t2
+4: 1.8256878668084204
+16: 3.2834055804664617
+64: 18.917487992035966
+128: 30.56859656804358
+256: 45.38773459051425
+\end{lstlisting}
+
 \subsection*{Código}
 
 \lstinputlisting[label={ex3a},caption=\textbf{Base de código para a questão 3.a},language=Python]{../exercicio3/projeto1-3-a.py}
 
 \lstinputlisting[label={ex3b},caption=\textbf{Base de código para a questão 3.b},language=Python]{../exercicio3/projeto1-3-b.py}
 
+\lstinputlisting[label={ex3c},caption=\textbf{Base de código para a questão 3.c},language=Python]{../exercicio3/projeto1-3-c.py}
 
 \bibliographystyle{IEEEtran}
 \footnotesize{

@@ -1,5 +1,6 @@
 from pprint import pprint
 from numpy import dot, subtract
+import time
 
 def create_system(n):
   A = [[(2.0 if i == j else -1.0 if abs(i-j) == 1 else 0.0) for i in range(n)] for j in range(n)]
@@ -18,18 +19,30 @@ def solve_system(n):
   print("x: ")
   pprint(x, width=30)
 
+  start = time.time()
   _, _, _, x1 = decompose_and_solve(A, b)
+  end = time.time()
+  t1 = end - start
   print("\nx1 = decompose_and_solve(A, b): ")
   pprint(x1, width=30)
 
+  start = time.time()
   _, _, _, x2 = tridiagonal_decompose_and_solve(A, b)
+  end = time.time()
+  t2 = end - start
   print("\nx2 = tridiagonal_decompose_and_solve(A, b): ")
   pprint(x2, width=30)
 
   e1 = subtract(x, x1)
-  print("\nnormal factorization error (e1 = x - x1): ")
+  print("\nnormal factorization error (x - x1): ")
   pprint(e1, width=30)
 
   e2 = subtract(x, x2)
-  print("\ntridiagonal specific factorization error (e2 = x - x2): ")
+  print("\ntridiagonal specific factorization error (x - x2): ")
   pprint(e2, width=30)
+
+  print("\ne1 == e2: " + str((e1 == e2).all()))
+
+  print("\nt1: " + str(t1) + " | t2: " + str(t2))
+  print("t1 > t2" if t1 > t2 else "t1 < t2")
+  print("t1/t2 == " + str(t1/t2))

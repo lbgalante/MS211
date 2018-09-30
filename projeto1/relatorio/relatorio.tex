@@ -345,10 +345,36 @@ solução analítica:
 Discuta o comportamento dos programas para o caso em que $ n $ é grande.
 
 \subsection{}
+Avaliando a ordem de operações realizadas pelo algoritmo de fatoração $ A=LU $ (vide 
+Listagem \ref{ex3a} linha 4), temos:
+\[ n^2 + n^2 + \sum_{j=0}^{n-1} \left[ 
+   \sum_{i=0}^{j}\sum_{k=0}^{i}1 + \sum_{i=j}^{n-1}\sum_{k=0}^{j}1
+   \right] \in O(n^3) \]
+
+Enquanto que para as funções (análogas) de substituição que serolvem os sistemas
+triangulares $ L\mathbf{y} = \mathbf{b} $ e $ U\mathbf{x} = \mathbf{y} $ (linhas 15 e 22 
+da Listagem \ref{ex3a}) temos:
+\[ n + \sum_{i=0}^{n-1}i \in O(n^2) \]
+
+Portanto o algoritmo tem complexidade computacional $ O(n^3) $.
 
 \subsection{}
+Uma vez que só temos valores não nulos nos elementos $ a_{ij} $ com $ |i − j| \leq 1 $,
+há $ (3n - 2) $ elementos a serem considerados em uma matriz $ n \times n $.
+
+Assim, utilizando um algoritmo especializadopara uma matriz $ A $
+tridiagonal~\cite{barannyk} , a fatoração $ A=LU $ leva $ O(n) $ operações (pois 
+podemos realizá-la em apenas um laço, vide Listagem \ref{ex3b} linha 28).
+
+Deste modo, a complexidade computacional do algoritmo passa a ser dominada pelas mesmas 
+funções de substituição para frente e para trás utilizadas na parte A, que 
+executam $ O(n^2) $ operações para resolver os sistemas triangulares resultantes.
 
 \subsection*{Código}
+
+\lstinputlisting[label={ex3a},caption=\textbf{Base de código para a questão 3.a},language=Python]{../exercicio3/projeto1-3-a.py}
+
+\lstinputlisting[label={ex3b},caption=\textbf{Base de código para a questão 3.b},language=Python]{../exercicio3/projeto1-3-b.py}
 
 
 \bibliographystyle{IEEEtran}

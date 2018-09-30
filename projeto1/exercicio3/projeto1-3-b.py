@@ -52,4 +52,3 @@ def tridiagonal_decompose_and_solve(A, b):
     y = forward_substitute(L, b)
     x = back_substitute(U, y)
     return (L, U, y, x)
-    return (L, U)

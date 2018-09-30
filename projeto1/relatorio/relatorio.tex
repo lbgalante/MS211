@@ -320,6 +320,30 @@ diferença significativa em fator de convergência, sendo o método modificado m
 
 \section{Questão 3}
 
+Sejam $ A \in \mathbb{R}^{n×n} $ uma matriz inversível, $ \mathbf{b} \in \mathbb{R}^{n} $
+um vetor dado e o problema: encontrar $ \mathbf{x} \in \mathbb{R}^{n} $ tal que
+\begin{equation}
+A\mathbf{x} = \mathbf{b}.
+\end{equation}
+
+a) Utilizando como base algum dos diversos algoritmos encontrados nas referencias
+bibliográficas, escreva um programa para realizar a fatoração $ A = LU $ e, 
+utilizando esta fatoração, resolver o problema $ (1). $
+Discuta sua complexidade computacional.
+
+b) Com base no algoritmo da letra a), desenvolva um programa especializado para o caso 
+em que a matriz $ A $ é tridiagonal, ou seja $ A = (a_{ij}) $ com $ a_{ij} = 0 $ para 
+$ |i − j| > 1 $, discutindo sua complexidade computacional.
+
+c) Utilizando os programas das letras a) e b), resolva o sistema dado por:
+\[ −x_{k−1} + 2x_k − x_{k+1} = \frac{8}{(n + 1)^2}, \quad k = 1, 2, . . . , n \]
+
+com $ x_0 = x_{n+1} = 0 $, para vários valores de $ n $ e compare sua solução com a
+solução analítica:
+\[ x_k = 4 \left[ \frac{k}{n+1} - \left( \frac{k}{n+1} \right)^2 \right]. \]
+
+Discuta o comportamento dos programas para o caso em que $ n $ é grande.
+
 \subsection{}
 
 \subsection{}
